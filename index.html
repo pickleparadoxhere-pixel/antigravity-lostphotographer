@@ -3,23 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Lost Photographer | Professional Photography by Ronakraj Parmar</title>
-  <meta name="description" content="The Lost Photographer - Modern photography portfolio featuring weddings, baby, maternity, fashion, and fitness photography. Based in Dahod, Gujarat.">
+  <title>The Lost Photographer™ | Professional Photography by Ronakraj Parmar</title>
+  <meta name="description" content="The Lost Photographer™ - Modern photography portfolio featuring weddings, baby, maternity, fashion, and fitness photography. Based in Dahod, Gujarat.">
   <!-- Google Fonts for Editorial Vibe -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@200..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Ethereal Pastel Blobs -->
+  <div class="blob-container">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
 
   <!-- Navigation Header -->
   <header class="header">
     <div class="header-content">
       <div class="logo-container">
-        <img src="https://res.cloudinary.com/dvctgflah/image/upload/v1782021922/IMG_1649_pckawe.jpg" alt="The Lost Photographer Logo" class="logo">
+        <img src="https://res.cloudinary.com/dvctgflah/image/upload/v1782021922/IMG_1649_pckawe.jpg" alt="The Lost Photographer™ Logo" class="logo">
         <div class="branding-text">
-          <span class="site-name">THE LOST PHOTOGRAPHER</span>
+          <span class="site-name">THE LOST PHOTOGRAPHER™</span>
           <span class="site-sub">BY RONAKRAJ PARMAR</span>
         </div>
       </div>
@@ -36,6 +42,7 @@
 
   <!-- Split Hero Section -->
   <section class="hero-split" id="home">
+    <div class="bg-watermark">CREATIVE</div>
     <div class="hero-right">
       <div class="hero-static-frame">
         <img src="https://res.cloudinary.com/dvctgflah/image/upload/v1780755781/SaveClip.App_650959082_18115196377565102_6598422578232592987_n_x9zpd7.jpg" alt="Featured Work" class="hero-static-img" id="heroScrollImg">
@@ -46,11 +53,17 @@
         <span class="hero-tag">EST. 2016</span>
         <h2 class="hero-title">Chasing Light.<br>Capturing Soul.</h2>
         <p class="hero-description">
-          Welcome to the portfolio of <strong>thelostphotographer</strong>. I capture the genuine, raw moments of your life and turn them into timeless memories.
+          Welcome to the portfolio of <strong>thelostphotographer™</strong>. I capture the genuine, raw moments of your life and turn them into timeless memories.
         </p>
         <div class="hero-cta-group">
           <a href="#gallery" class="btn btn-primary">View Portfolio</a>
           <a href="#contact" class="btn btn-secondary">Book Session</a>
+        </div>
+        
+        <!-- Premium Scroll Down Indicator -->
+        <div class="scroll-indicator">
+          <span>Scroll</span>
+          <div class="scroll-line"></div>
         </div>
       </div>
     </div>
@@ -118,13 +131,16 @@
       </div>
       
       <!-- Filter Controls -->
-      <div class="filter-container">
-        <button class="filter-btn active" data-filter="all">All Visuals</button>
-        <button class="filter-btn" data-filter="baby">Baby Portraits</button>
-        <button class="filter-btn" data-filter="fashion">High Fashion</button>
-        <button class="filter-btn" data-filter="maternity">Maternity</button>
-        <button class="filter-btn" data-filter="wedding">Weddings</button>
-        <button class="filter-btn" data-filter="fitness">Fitness & Power</button>
+      <div class="filter-container-wrapper">
+        <div class="filter-container">
+          <div class="filter-indicator" id="filterIndicator"></div>
+          <button class="filter-btn active" data-filter="all">All Visuals</button>
+          <button class="filter-btn" data-filter="baby">Baby Portraits</button>
+          <button class="filter-btn" data-filter="fashion">High Fashion</button>
+          <button class="filter-btn" data-filter="maternity">Maternity</button>
+          <button class="filter-btn" data-filter="wedding">Weddings</button>
+          <button class="filter-btn" data-filter="fitness">Fitness & Power</button>
+        </div>
       </div>
 
       <!-- Arrow Buttons for Gallery Navigation -->
@@ -326,9 +342,13 @@
   <!-- Editorial Minimal Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 THE LOST PHOTOGRAPHER &bull; DESIGNED BY <a href="https://instagram.com/jigarwhatnow" target="_blank" class="footer-credit-link">@jigarwhatnow</a></p>
+      <p>&copy; 2026 THE LOST PHOTOGRAPHER™ &bull; DESIGNED BY <a href="https://instagram.com/jigarwhatnow" target="_blank" class="footer-credit-link">@jigarwhatnow</a></p>
     </div>
   </footer>
+
+  <!-- Custom interactive cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
+  <div class="custom-cursor-dot" id="customCursorDot"></div>
 
   <script src="script.js"></script>
 </body>
