@@ -377,4 +377,46 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  // ===== Gallery Scroll Progress Indicator for Mobile =====
+  const galleryScrollContainer = document.getElementById('galleryTrack');
+  const galleryProgressBar = document.getElementById('galleryProgressBar');
+  if (galleryScrollContainer && galleryProgressBar) {
+    galleryScrollContainer.addEventListener('scroll', () => {
+      const scrollWidth = galleryScrollContainer.scrollWidth - galleryScrollContainer.clientWidth;
+      if (scrollWidth > 0) {
+        const scrollPercent = (galleryScrollContainer.scrollLeft / scrollWidth) * 100;
+        galleryProgressBar.style.width = `${scrollPercent}%`;
+      }
+    }, { passive: true });
+  }
+
+  // ===== Mobile Navigation Active Section Sync =====
+  const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+  const targetSections = document.querySelectorAll('#home, #about, #gallery, #contact');
+  if (mobileNavLinks.length > 0 && targetSections.length > 0) {
+    const navSyncObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.getAttribute('id');
+          if (!sectionId) return;
+          mobileNavLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === `#${sectionId}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, {
+      rootMargin: '-30% 0px -40% 0px', // Triggers when section occupies middle of viewport
+      threshold: 0.1
+    });
+
+    targetSections.forEach(section => {
+      navSyncObserver.observe(section);
+    });
+  }
 });

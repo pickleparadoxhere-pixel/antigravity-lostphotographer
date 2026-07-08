@@ -298,7 +298,7 @@ body {
 }
 
 .nav-menu {
-  display: flex;
+  display: none; /* Hidden on mobile */
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5rem 1.5rem;
@@ -1239,8 +1239,8 @@ body {
    ========================================================================== */
 .scroll-top-trigger {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 90px; /* Shifted up on mobile to clear bottom nav */
+  right: 20px;
   width: 48px;
   height: 48px;
   background: var(--text-primary);
@@ -1310,6 +1310,7 @@ body {
   }
   
   .nav-menu {
+    display: flex; /* Visible on desktop */
     gap: 2.25rem;
     width: auto;
   }
@@ -1544,3 +1545,98 @@ body {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
 }
+
+/* ==========================================================================
+   MOBILE INTERACTION ELEMENTS & UTILITIES
+   ========================================================================== */
+
+/* Floating Glass Bottom Navigation for Mobile */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  width: calc(100% - 30px);
+  max-width: 480px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 15px 35px rgba(45, 45, 58, 0.08);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  z-index: 998;
+  border-radius: 40px;
+}
+
+.mobile-nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  gap: 4px;
+  transition: var(--transition-fast);
+  width: 60px;
+}
+
+.mobile-nav-icon {
+  width: 18px;
+  height: 18px;
+  transition: var(--transition-fast);
+  stroke: currentColor;
+}
+
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: var(--accent-gold);
+}
+
+.mobile-nav-link:hover .mobile-nav-icon, .mobile-nav-link.active .mobile-nav-icon {
+  transform: scale(1.1);
+}
+
+/* Hide bottom nav on desktop, restore top button */
+@media (min-width: 768px) {
+  .mobile-bottom-nav {
+    display: none;
+  }
+  .scroll-top-trigger {
+    bottom: 30px;
+    right: 30px;
+  }
+}
+
+/* Gallery scroll progress bar */
+.gallery-scroll-progress-wrapper-mobile {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: 2px;
+  background: rgba(45, 45, 58, 0.08);
+  margin: 1.5rem auto 0 auto;
+  overflow: hidden;
+  position: relative;
+  border-radius: 2px;
+}
+
+.gallery-scroll-progress-bar-mobile {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--accent-gold);
+  transition: width 0.1s ease-out;
+}
+
+@media (min-width: 768px) {
+  .gallery-scroll-progress-wrapper-mobile {
+    display: none;
+  }
+}
+
