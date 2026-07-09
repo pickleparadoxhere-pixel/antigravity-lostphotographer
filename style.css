@@ -569,7 +569,7 @@ body {
    ========================================================================== */
 .about-cinematic {
   position: relative;
-  padding: 6.5rem 0;
+  padding: 3rem 0;
   display: flex;
   align-items: center;
   background: #fbfbfd;
@@ -674,7 +674,7 @@ body {
    TEAM LAYOUT SECTION (ASYNCHRONOUS TILT)
    ========================================================================== */
 .team-section {
-  padding: 6.5rem 0;
+  padding: 3rem 0;
   background: transparent;
   border-bottom: 1px solid var(--border-color);
   position: relative;
@@ -761,7 +761,7 @@ body {
    PORTFOLIO & GALLERY ARCHITECTURE (MORPHING PILLED TABS)
    ========================================================================== */
 .gallery-section {
-  padding: 6.5rem 0;
+  padding: 3rem 0;
   background: transparent;
   position: relative;
 }
@@ -797,17 +797,13 @@ body {
 }
 
 .filter-container {
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
   position: relative;
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid var(--border-color);
-  padding: 5px;
-  border-radius: 40px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  max-width: 100%;
-  box-shadow: 0 10px 30px rgba(45, 45, 58, 0.02);
 }
 
 .filter-container::-webkit-scrollbar {
@@ -815,6 +811,7 @@ body {
 }
 
 .filter-indicator {
+  display: none;
   position: absolute;
   top: 5px;
   left: 5px;
@@ -827,27 +824,32 @@ body {
 }
 
 .filter-btn {
-  background: transparent;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  font-size: 11px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-color);
+  padding: 0.55rem 0.25rem;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 0.5px;
   color: var(--text-muted);
   text-transform: uppercase;
   cursor: pointer;
   white-space: nowrap;
+  text-align: center;
+  border-radius: 20px;
   position: relative;
   z-index: 2;
-  transition: color 0.4s ease;
+  transition: all 0.3s ease;
 }
 
 .filter-btn:hover {
   color: var(--text-primary);
+  border-color: var(--accent-gold);
 }
 
 .filter-btn.active {
+  background: var(--text-primary);
   color: var(--bg-deep);
+  border-color: var(--text-primary);
 }
 
 .gallery-nav-buttons-mobile {
@@ -1039,7 +1041,7 @@ body {
    TESTIMONIALS SECTION
    ========================================================================== */
 .testimonials-section {
-  padding: 6.5rem 0;
+  padding: 3rem 0;
   background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -1060,7 +1062,7 @@ body {
    CONTACT SECTION & STYLE UPGRADE
    ========================================================================== */
 .contact-section {
-  padding: 6.5rem 0;
+  padding: 3rem 0;
   background: transparent;
 }
 
@@ -1277,7 +1279,7 @@ body {
   background: #fbfbfd;
   color: var(--text-muted);
   text-align: center;
-  padding: 3rem 0;
+  padding: 3rem 0 8rem 0; /* Expanded bottom padding to clear mobile navigation */
   font-size: 11px;
   letter-spacing: 1.5px;
   border-top: 1px solid var(--border-color);
@@ -1303,6 +1305,13 @@ body {
     max-width: 1400px;
   }
   
+  .team-section,
+  .gallery-section,
+  .testimonials-section,
+  .contact-section {
+    padding: 6.5rem 0;
+  }
+  
   .header-content {
     flex-direction: row;
     justify-content: space-between;
@@ -1313,6 +1322,37 @@ body {
     display: flex; /* Visible on desktop */
     gap: 2.25rem;
     width: auto;
+  }
+  
+  .filter-container {
+    display: inline-flex;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    border-radius: 40px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    max-width: 100%;
+    box-shadow: 0 10px 30px rgba(45, 45, 58, 0.02);
+  }
+  
+  .filter-indicator {
+    display: block;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 11px;
+    letter-spacing: 2px;
+    border-radius: 0;
+  }
+
+  .filter-btn.active {
+    background: transparent;
+    color: var(--bg-deep);
   }
   
   .nav-menu a {
@@ -1600,7 +1640,7 @@ body {
   transform: scale(1.1);
 }
 
-/* Hide bottom nav on desktop, restore top button */
+/* Hide bottom nav on desktop, restore top button & footer */
 @media (min-width: 768px) {
   .mobile-bottom-nav {
     display: none;
@@ -1608,6 +1648,9 @@ body {
   .scroll-top-trigger {
     bottom: 30px;
     right: 30px;
+  }
+  .footer {
+    padding: 3rem 0;
   }
 }
 
@@ -1639,4 +1682,53 @@ body {
     display: none;
   }
 }
+
+/* Innovative Crew Nodes layout */
+.crew-nodes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.crew-node {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 6px;
+  border: 1px solid rgba(45, 45, 58, 0.04);
+  transition: var(--transition-fast);
+  box-shadow: 0 4px 15px rgba(45, 45, 58, 0.01);
+}
+
+.crew-node:hover {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: var(--accent-gold);
+  transform: translate3d(3px, 0, 0);
+  box-shadow: 0 8px 20px rgba(211, 142, 117, 0.05);
+}
+
+.crew-number {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.crew-node-text h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.crew-node-text p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
 
