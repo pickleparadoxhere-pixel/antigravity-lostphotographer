@@ -419,4 +419,32 @@ document.addEventListener('DOMContentLoaded', () => {
       navSyncObserver.observe(section);
     });
   }
+
+  // ===== Logo Click Sparkle/Spin Animation & Smooth Scroll =====
+  const logoLink = document.getElementById('logoContainerLink');
+  const logoImg = document.getElementById('logoImg');
+  if (logoLink && logoImg) {
+    logoLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      // Trigger animation
+      logoImg.classList.add('animate-click');
+      setTimeout(() => {
+        logoImg.classList.remove('animate-click');
+      }, 800);
+      
+      // Smooth scroll to top/home
+      const homeSection = document.getElementById('home');
+      if (homeSection) {
+        homeSection.scrollIntoView({ behavior: 'smooth' });
+      }
+      
+      // Update active state in mobile bottom nav
+      const homeNavLink = document.querySelector('.mobile-nav-link[href="#home"]');
+      if (homeNavLink) {
+        document.querySelectorAll('.mobile-nav-link').forEach(link => link.classList.remove('active'));
+        homeNavLink.classList.add('active');
+      }
+    });
+  }
 });
