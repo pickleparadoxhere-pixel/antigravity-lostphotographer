@@ -811,8 +811,9 @@ body {
 }
 
 .filter-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
   width: 100%;
   max-width: 480px;
@@ -840,7 +841,7 @@ body {
 .filter-btn {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid var(--border-color);
-  padding: 0.55rem 0.25rem;
+  padding: 0.55rem 0.85rem;
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.5px;
