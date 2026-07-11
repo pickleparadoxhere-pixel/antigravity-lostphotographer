@@ -1301,6 +1301,16 @@ body {
   border-top: 1px solid var(--border-color);
 }
 
+.footer-copyright {
+  margin-bottom: 0.6rem;
+}
+
+.footer-designed-by {
+  font-size: 10.5px;
+  letter-spacing: 1.25px;
+  color: rgba(45, 45, 58, 0.65);
+}
+
 .footer-credit-link {
   color: #b56950; /* Darker gold/terracotta for premium readability */
   text-decoration: none;

@@ -3,53 +3,71 @@ document.addEventListener('DOMContentLoaded', () => {
   const customCursor = document.getElementById('customCursor');
   const customCursorDot = document.getElementById('customCursorDot');
   
-  if (customCursor && customCursorDot) {
+  // Completely disable on touch/mobile devices for ultimate performance
+  const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768;
+  
+  if (isTouchDevice) {
+    if (customCursor) customCursor.style.display = 'none';
+    if (customCursorDot) customCursorDot.style.display = 'none';
+  } else if (customCursor && customCursorDot) {
     let mouseX = 0, mouseY = 0; // Target coordinates
     let ringX = 0, ringY = 0;   // Interpolated coordinates for outer ring
-    let isMoving = false;
+    let isTicking = false;
+    
+    const updateCursor = () => {
+      const dx = mouseX - ringX;
+      const dy = mouseY - ringY;
+      
+      ringX += dx * 0.15;
+      ringY += dy * 0.15;
+      
+      customCursor.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      
+      // Stop the loop if the ring has caught up to mouse position to save CPU cycles
+      if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+        ringX = mouseX;
+        ringY = mouseY;
+        isTicking = false;
+      } else {
+        requestAnimationFrame(updateCursor);
+      }
+    };
     
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      isMoving = true;
       
-      // Instantly position the dot
+      // Instantly position the center dot
       customCursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    });
-    
-    // Animation loop for smooth trailing effect (lerp)
-    const renderCursor = () => {
-      if (isMoving) {
-        ringX += (mouseX - ringX) * 0.12;
-        ringY += (mouseY - ringY) * 0.12;
-        customCursor.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      
+      if (!isTicking) {
+        isTicking = true;
+        requestAnimationFrame(updateCursor);
       }
-      requestAnimationFrame(renderCursor);
-    };
-    requestAnimationFrame(renderCursor);
+    }, { passive: true });
     
     // Manage hover interactions
     const interactiveElements = document.querySelectorAll('a, button, [role="button"], .filter-btn, .gal-nav-btn, .pill-btn');
     interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'), { passive: true });
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'), { passive: true });
     });
     
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach(item => {
-      item.addEventListener('mouseenter', () => document.body.classList.add('cursor-view'));
-      item.addEventListener('mouseleave', () => document.body.classList.remove('cursor-view'));
+      item.addEventListener('mouseenter', () => document.body.classList.add('cursor-view'), { passive: true });
+      item.addEventListener('mouseleave', () => document.body.classList.remove('cursor-view'), { passive: true });
     });
     
     // Hide cursor when leaving window
     document.addEventListener('mouseleave', () => {
       customCursor.style.opacity = '0';
       customCursorDot.style.opacity = '0';
-    });
+    }, { passive: true });
     document.addEventListener('mouseenter', () => {
       customCursor.style.opacity = '1';
       customCursorDot.style.opacity = '1';
-    });
+    }, { passive: true });
   }
 
   // ===== Header Scroll State =====
@@ -97,38 +115,57 @@ document.addEventListener('DOMContentLoaded', () => {
     let scrollSpeed = 0;
     let skewTarget = 0;
     let currentSkew = 0;
+    let isTicking = false;
+    
+    // Cache DOM selections once to avoid layout thrashing
+    const cachedGalleryItems = Array.from(document.querySelectorAll('.gallery-grid .gallery-item'));
+    const teamVisual = document.querySelector('.team-visual');
+    const aboutCard = document.querySelector('.about-card');
     
     const updateSkew = () => {
       const scrollY = window.scrollY;
       scrollSpeed = scrollY - lastScrollY;
       lastScrollY = scrollY;
       
-      // Calculate target skew angle based on scroll speed, capped to avoid breakages
       skewTarget = Math.max(-6, Math.min(6, scrollSpeed * 0.08));
-      
-      // Smoothly interpolate current skew back to target/zero
       currentSkew += (skewTarget - currentSkew) * 0.15;
       
-      // Apply translation adjustments to accommodate staggered margins on desktop
-      const galleryItems = document.querySelectorAll('.gallery-grid .gallery-item');
-      galleryItems.forEach((item, index) => {
-        const desktopOffset = (index % 2 === 0) ? -30 : 30; // Matches CSS offsets
+      // Stop the loop if the skew settles back close to 0 to save CPU resources
+      if (Math.abs(currentSkew) < 0.01 && Math.abs(skewTarget) < 0.01) {
+        currentSkew = 0;
+        isTicking = false;
+        
+        cachedGalleryItems.forEach((item, index) => {
+          const desktopOffset = (index % 2 === 0) ? -30 : 30;
+          item.style.transform = `translate3d(0, ${desktopOffset}px, 0)`;
+        });
+        if (teamVisual) teamVisual.style.transform = 'rotate(-1.5deg)';
+        if (aboutCard) aboutCard.style.transform = 'none';
+        return; // Exit animation loop
+      }
+      
+      cachedGalleryItems.forEach((item, index) => {
+        const desktopOffset = (index % 2 === 0) ? -30 : 30;
         item.style.transform = `translate3d(0, ${desktopOffset}px, 0) skewY(${currentSkew}deg)`;
       });
       
-      const teamVisual = document.querySelector('.team-visual');
       if (teamVisual) {
         teamVisual.style.transform = `rotate(-1.5deg) skewY(${currentSkew}deg)`;
       }
-
-      const aboutCard = document.querySelector('.about-card');
       if (aboutCard) {
         aboutCard.style.transform = `skewY(${currentSkew * 0.5}deg)`;
       }
       
       requestAnimationFrame(updateSkew);
     };
-    requestAnimationFrame(updateSkew);
+    
+    window.addEventListener('scroll', () => {
+      if (!isTicking) {
+        lastScrollY = window.scrollY;
+        isTicking = true;
+        requestAnimationFrame(updateSkew);
+      }
+    }, { passive: true });
   }
   
   // ===== Scroll timeline verification & JS Fallback for unsupported browsers =====
