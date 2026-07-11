@@ -1292,23 +1292,27 @@ body {
    ========================================================================== */
 .footer {
   background: #fbfbfd;
-  color: rgba(45, 45, 58, 0.75); /* Darker and more legible */
+  color: var(--text-primary); /* High contrast dark charcoal */
   text-align: center;
-  padding: 3rem 0 8rem 0; /* Expanded bottom padding to clear mobile navigation */
-  font-size: 11px;
+  padding: 3.5rem 0 8.5rem 0; /* Expanded bottom padding to clear mobile navigation */
+  font-size: 11.5px;
+  font-weight: 500;
   letter-spacing: 1.5px;
   border-top: 1px solid var(--border-color);
 }
 
 .footer-credit-link {
-  color: var(--accent-gold);
+  color: #b56950; /* Darker gold/terracotta for premium readability */
   text-decoration: none;
   font-weight: 700;
+  border-bottom: 1px solid rgba(181, 105, 80, 0.35);
+  padding-bottom: 1px;
   transition: var(--transition-fast);
 }
 
 .footer-credit-link:hover {
   color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
 }
 
 /* ==========================================================================
