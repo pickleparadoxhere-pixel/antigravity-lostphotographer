@@ -1292,7 +1292,7 @@ body {
    ========================================================================== */
 .footer {
   background: #fbfbfd;
-  color: var(--text-muted);
+  color: rgba(45, 45, 58, 0.75); /* Darker and more legible */
   text-align: center;
   padding: 3rem 0 8rem 0; /* Expanded bottom padding to clear mobile navigation */
   font-size: 11px;
