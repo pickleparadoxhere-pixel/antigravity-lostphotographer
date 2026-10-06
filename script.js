@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // 2. Scroll Reveal Fallback using IntersectionObserver
-    const revealTargets = document.querySelectorAll('.team-visual, .team-details, .section-header-center, .filter-container-wrapper, .google-reviews-widget-wrapper, .contact-main-info, .contact-social-pane');
+    const revealTargets = document.querySelectorAll('.team-visual, .crew-card, .section-header-center, .filter-container-wrapper, .google-reviews-widget-wrapper, .contact-main-info, .contact-social-pane');
     
     revealTargets.forEach(target => {
       target.classList.add('reveal-fallback');
