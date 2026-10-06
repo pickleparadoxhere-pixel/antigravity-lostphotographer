@@ -695,29 +695,67 @@ body {
 }
 
 .team-collective-wrapper {
-  margin: 3.5rem auto 1.5rem auto;
+  margin: 4.5rem auto 1.5rem auto;
   max-width: 1080px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.team-banner-card {
+/* Archival Exhibition Plate Showcase */
+.team-archival-plate {
   width: 100%;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-  position: relative;
-  box-shadow: 0 18px 45px rgba(45, 45, 58, 0.05);
-  background: rgba(255, 255, 255, 0.6);
-  transform: rotate(-0.8deg);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(211, 142, 117, 0.3);
+  outline: 1px solid rgba(211, 142, 117, 0.15);
+  outline-offset: 8px;
+  border-radius: 2px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 50px rgba(45, 45, 58, 0.05);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease, border-color 0.4s ease;
   will-change: transform;
 }
 
-.team-banner-card:hover {
-  transform: rotate(0deg) scale(1.015);
-  box-shadow: 0 28px 60px rgba(45, 45, 58, 0.09);
+.team-archival-plate:hover {
+  transform: translateY(-5px);
+  border-color: rgba(211, 142, 117, 0.55);
+  box-shadow: 0 30px 65px rgba(211, 142, 117, 0.12), 0 8px 24px rgba(45, 45, 58, 0.04);
+}
+
+.archival-plate-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.archival-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.9rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(211, 142, 117, 0.2);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8c8680;
+}
+
+.archival-tag {
+  color: var(--accent-gold);
+}
+
+.archival-loc {
+  letter-spacing: 1.5px;
+}
+
+.archival-image-frame {
+  overflow: hidden;
+  border: 1px solid rgba(211, 142, 117, 0.15);
+  border-radius: 2px;
+  background: #fbf9f6;
 }
 
 .team-banner-img {
@@ -725,40 +763,63 @@ body {
   height: auto;
   display: block;
   object-fit: cover;
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.team-banner-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2.5rem 2rem 1.5rem;
-  background: linear-gradient(180deg, transparent 0%, rgba(45, 45, 58, 0.65) 100%);
+.team-archival-plate:hover .team-banner-img {
+  transform: scale(1.02);
+}
+
+.archival-footer {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.25rem;
+  margin-top: 0.5rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
-.team-banner-badge {
-  font-size: 10px;
+.archival-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.archival-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.archival-desc {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.archival-stamp {
+  border: 1px dashed var(--accent-gold);
+  padding: 6px 14px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #ffffff;
-  background: rgba(211, 142, 117, 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 6px 16px;
-  border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  color: var(--accent-gold);
+  white-space: nowrap;
+  border-radius: 2px;
+  background: rgba(211, 142, 117, 0.05);
 }
 
-/* 6-Artist Crew Cards Grid */
+/* ==========================================================================
+   OPTICAL VIEWFINDER CREW DOSSIERS
+   ========================================================================== */
 .crew-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 2.25rem;
   width: 100%;
 }
 
@@ -771,21 +832,64 @@ body {
 
 .crew-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-color);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(45, 45, 58, 0.02);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(211, 142, 117, 0.22);
+  border-radius: 4px;
+  box-shadow: 0 12px 36px rgba(45, 45, 58, 0.03);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
   will-change: transform;
+}
+
+/* Optical Viewfinder Rangefinder Framing Corners */
+.crew-card::before,
+.crew-card::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  pointer-events: none;
+  z-index: 10;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.crew-card::before {
+  top: 8px;
+  left: 8px;
+  border-top: 1.5px solid rgba(211, 142, 117, 0.4);
+  border-left: 1.5px solid rgba(211, 142, 117, 0.4);
+}
+
+.crew-card::after {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 1.5px solid rgba(211, 142, 117, 0.4);
+  border-right: 1.5px solid rgba(211, 142, 117, 0.4);
 }
 
 .crew-card:hover {
   transform: translateY(-8px);
-  border-color: rgba(211, 142, 117, 0.45);
-  box-shadow: 0 24px 50px rgba(211, 142, 117, 0.12), 0 8px 24px rgba(45, 45, 58, 0.04);
+  border-color: rgba(211, 142, 117, 0.55);
+  box-shadow: 0 28px 60px rgba(211, 142, 117, 0.12), 0 6px 20px rgba(45, 45, 58, 0.04);
+}
+
+.crew-card:hover::before {
+  top: 6px;
+  left: 6px;
+  width: 14px;
+  height: 14px;
+  border-color: var(--accent-gold);
+  box-shadow: -2px -2px 8px rgba(211, 142, 117, 0.35);
+}
+
+.crew-card:hover::after {
+  bottom: 6px;
+  right: 6px;
+  width: 14px;
+  height: 14px;
+  border-color: var(--accent-gold);
+  box-shadow: 2px 2px 8px rgba(211, 142, 117, 0.35);
 }
 
 .crew-card-inner {
@@ -794,123 +898,171 @@ body {
   height: 100%;
 }
 
-/* Portrait Visual Area */
-.crew-avatar-wrapper {
+/* Micro-Telemetry Header */
+.crew-telemetry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px 9px;
+  border-bottom: 1px dashed rgba(211, 142, 117, 0.18);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+}
+
+.telemetry-idx {
+  color: var(--accent-gold);
+}
+
+.telemetry-param {
+  color: #918b84;
+}
+
+/* Portrait Visual Area with Lens Rings & Typography Ghost Watermark */
+.crew-avatar-stage {
   position: relative;
-  height: 290px;
+  height: 285px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   overflow: hidden;
-  padding-top: 1.5rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(250, 248, 245, 0.9) 100%);
-  border-bottom: 1px solid var(--border-color);
+  background: radial-gradient(circle at 50% 65%, rgba(255, 245, 240, 0.7) 0%, rgba(248, 245, 242, 0.4) 60%, transparent 100%);
 }
 
-.crew-avatar-backdrop {
+.crew-aperture-ring {
   position: absolute;
   width: 210px;
   height: 210px;
   border-radius: 50%;
-  filter: blur(35px);
-  opacity: 0.75;
-  top: 25px;
+  border: 1px dashed rgba(211, 142, 117, 0.22);
+  top: 35px;
   left: 50%;
   transform: translateX(-50%);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
-  z-index: 1;
   pointer-events: none;
+  z-index: 1;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
 }
 
-.crew-avatar-backdrop.backdrop-1 { background: radial-gradient(circle, #fcd5c7 0%, #fad2e1 100%); }
-.crew-avatar-backdrop.backdrop-2 { background: radial-gradient(circle, #d8f3dc 0%, #b7e4c7 100%); }
-.crew-avatar-backdrop.backdrop-3 { background: radial-gradient(circle, #e2d9f3 0%, #c9bcf0 100%); }
-.crew-avatar-backdrop.backdrop-4 { background: radial-gradient(circle, #ffeedb 0%, #fcd5ce 100%); }
-.crew-avatar-backdrop.backdrop-5 { background: radial-gradient(circle, #d0f4de 0%, #a9def9 100%); }
-.crew-avatar-backdrop.backdrop-6 { background: radial-gradient(circle, #fde2e4 0%, #ffcad4 100%); }
+.crew-card:hover .crew-aperture-ring {
+  transform: translateX(-50%) rotate(45deg) scale(1.08);
+  border-color: rgba(211, 142, 117, 0.45);
+}
 
-.crew-card:hover .crew-avatar-backdrop {
-  transform: translateX(-50%) scale(1.15);
-  opacity: 0.95;
+.crew-ghost-watermark {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: 3.6rem;
+  font-weight: 300;
+  letter-spacing: 8px;
+  color: rgba(45, 45, 58, 0.05);
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 1;
+  white-space: nowrap;
+  transition: color 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.crew-card:hover .crew-ghost-watermark {
+  color: rgba(211, 142, 117, 0.12);
+  transform: translate(-50%, -54%) scale(1.04);
 }
 
 .crew-avatar-img {
   position: relative;
   z-index: 2;
-  height: 94%;
+  height: 95%;
   width: auto;
   max-width: 90%;
   object-fit: contain;
   object-position: bottom center;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
-  filter: drop-shadow(0 10px 18px rgba(45, 45, 58, 0.08));
+  filter: drop-shadow(0 8px 18px rgba(45, 45, 58, 0.08));
 }
 
 .crew-card:hover .crew-avatar-img {
-  transform: translateY(-4px) scale(1.04);
-  filter: drop-shadow(0 14px 24px rgba(45, 45, 58, 0.12));
+  transform: translateY(-5px) scale(1.03);
+  filter: drop-shadow(0 16px 26px rgba(45, 45, 58, 0.14));
 }
 
-.crew-index-tag {
-  position: absolute;
-  top: 14px;
-  right: 18px;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  color: var(--accent-gold);
-  opacity: 0.65;
-  z-index: 3;
-  font-weight: 500;
-}
-
-/* Text Content Area */
+/* Editorial Dossier Content */
 .crew-content {
-  padding: 1.6rem 1.75rem 2rem;
+  padding: 1.5rem 1.75rem 2rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  border-top: 1px solid rgba(211, 142, 117, 0.15);
+  background: rgba(255, 255, 255, 0.6);
 }
 
-.crew-role-badge {
+.crew-discipline-lead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.crew-discipline-bullet {
+  width: 5px;
+  height: 5px;
+  background: var(--accent-gold);
+  border-radius: 50%;
   display: inline-block;
-  align-self: flex-start;
+  box-shadow: 0 0 6px rgba(211, 142, 117, 0.6);
+}
+
+.crew-discipline {
   font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 2.2px;
   text-transform: uppercase;
   color: var(--accent-gold);
-  background: var(--accent-gold-rgba);
-  border: 1px solid var(--border-color-gold);
-  padding: 4px 10px;
-  border-radius: 20px;
-  margin-bottom: 0.8rem;
 }
 
 .crew-name {
   font-family: var(--font-display);
-  font-size: 1.85rem;
+  font-size: 2rem;
   font-weight: 400;
   color: var(--text-primary);
-  margin-bottom: 0.25rem;
-  letter-spacing: 0.25px;
-  line-height: 1.2;
+  margin-bottom: 0.2rem;
+  line-height: 1.18;
+  letter-spacing: -0.2px;
 }
 
 .crew-spec {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #8c8899;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #78736e;
   margin-bottom: 1rem;
-  display: block;
+}
+
+.crew-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(211, 142, 117, 0.4) 0%, rgba(211, 142, 117, 0.05) 100%);
+  margin-bottom: 1.1rem;
+  position: relative;
+}
+
+.crew-divider-diamond {
+  position: absolute;
+  top: -6px;
+  left: 0;
+  font-size: 8px;
+  color: var(--accent-gold);
+  line-height: 1;
 }
 
 .crew-bio {
   font-size: 13px;
   line-height: 1.75;
-  color: var(--text-muted);
+  color: #53505c;
   margin-top: auto;
+  font-weight: 400;
 }
 
 /* ==========================================================================
@@ -1694,6 +1846,7 @@ body {
     }
     
     .team-visual,
+    .team-archival-plate,
     .crew-card,
     .section-header-center,
     .filter-container-wrapper,
